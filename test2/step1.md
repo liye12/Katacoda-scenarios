@@ -2,20 +2,26 @@
 
 使用命令
 
-pip3 install numpy`{{execute interrupt}}
+`pip3 install numpy`{{execute interrupt}}
+
+## 运行python3
+
+`python3`{{execute interrupt}}
 
 
 
 ## 词性配置
 
-```python
+```{{execute}}
 SMOOTHNESS = 1e-8
-START = 'start' 
-END = 'end'  
-NOUN = 'subj'  
-ADV = 'adv'  
-ADJ = 'adj'  
+START = 'start'  # 句始tag
+END = 'end'  # 句末tag
+NOUN = 'subj'  # 名词
+ADV = 'adv'  # 副词
+ADJ = 'adj'  # 形容词
 ```
+
+
 
 ## 数据预处理
 
