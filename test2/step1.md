@@ -81,7 +81,6 @@ for i in range(T):
 ## 维特比算法
 ```
 def viterbi(sentence):
-    """维特比算法"""
     obs = [word2id[w] for w in sentence.strip()]  # 观测序列
     le = len(obs)  # 序列长度
 
