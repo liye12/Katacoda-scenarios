@@ -78,39 +78,36 @@ for i in range(T):
 
 ```{{execute}}
 
+## 请输出你的测试字符串(默认字符串：菜好好菜)
+`sentence = "菜好好菜" `{{execute}}
 ## 维特比算法
 ```
-def viterbi(sentence):
-    obs = [word2id[w] for w in sentence.strip()]  # 观测序列
-    le = len(obs)  # 序列长度
+obs = [word2id[w] for w in sentence.strip()]  # 观测序列
+le = len(obs)  # 序列长度
 
-    # 动态规划矩阵
-    dp = np.zeros((le, T))  # 记录节点最大概率对数
-    path = np.zeros((le, T), dtype=int)  # 记录上个转移节点
+# 动态规划矩阵
+dp = np.zeros((le, T))  # 记录节点最大概率对数
+path = np.zeros((le, T), dtype=int)  # 记录上个转移节点
 
-    for j in range(T):
-        dp[0][j] = start_p[j] + emit_p[j][obs[0]]
+for j in range(T):
+dp[0][j] = start_p[j] + emit_p[j][obs[0]]
 
-    for i in range(1, le):
-        for j in range(T):
-            dp[i][j], path[i][j] = max(
-                (dp[i - 1][k] + trans_p[k][j] + emit_p[j][obs[i]], k)
-                for k in range(T))
+for i in range(1, le):
+for j in range(T):
+dp[i][j], path[i][j] = max(
+(dp[i - 1][k] + trans_p[k][j] + emit_p[j][obs[i]], k)
+for k in range(T))
 
-    # 隐序列
-    states = [np.argmax(dp[le - 1])]
-    # 从后到前的循环来依次求出每个单词的词性
-    for i in range(le - 2, -1, -1):
-        states.insert(0, path[i + 1][states[0]])
+# 隐序列
+states = [np.argmax(dp[le - 1])]
+# 从后到前的循环来依次求出每个单词的词性
+for i in range(le - 2, -1, -1):
+states.insert(0, path[i + 1][states[0]])
 
-    # 打印
-    for word, tid in zip(sentence, states):
-        print(word, id2tag[tid])
+# 打印
+for word, tid in zip(sentence, states):
+print(word, id2tag[tid])
         
 ```{{execute}}
 
-## 测试
-```
-x = '菜好好菜'
-viterbi(x)
-```{{execute}}
+
