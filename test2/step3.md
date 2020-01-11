@@ -4,7 +4,7 @@
 
 复制下列代码
 
-运行python test
+运行python3 test
 
 ```python
 # -*- coding: utf-8 -*-
