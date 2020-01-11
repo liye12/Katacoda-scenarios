@@ -109,7 +109,8 @@ for i in range(le - 2, -1, -1):
 # 打印
 for word, tid in zip(sentence, states):
 	print(word, id2tag[tid])
-        
+
+
 ```{{execute}}
 
 
