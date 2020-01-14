@@ -4,3 +4,4 @@
 
 `pip3 install datetime`{{execute}}
 `pip3 install python-dateutil`{{execute}}
+`pip3 install jieba`{{execute}}
