@@ -32,10 +32,12 @@ def get_stopword_list():
 pos为是否只保留名词的依据
 
 ```
-def get_stopword_list():
-    stop_word_path='./stopword.txt'    #停用词所在的路径
-    stopword_list=[sw.replace('\n','') for sw in open(stop_word_path,encoding='utf8').readlines()]  #获取其中的停用词
-    return stopword_list
+def seg_to_list(sentence,pos=False):
+    if not pos:
+        seg_list=jieba.cut(sentence)   #不进行词性标注的分词
+    else:
+        seg_list=psg.cut(sentence)     #进行词性标注的分词
+    return seg_list
 ```{{execute}}
 
 ## 定义干扰词过滤方法
