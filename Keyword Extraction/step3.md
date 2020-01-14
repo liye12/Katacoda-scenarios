@@ -29,8 +29,8 @@ if __name__ == '__main__':
 ```{{execute}}
 
 ## 点击ESC 推出vim编辑模型
-保存并推出vim
-`：wq`{{execute}}
+保存并推出vim,输入以下命令 
+：wq
 
 ## 运行代码
-`python Keyword_Extraction`{{execute}}
+`python3 Keyword_Extraction`{{execute}}

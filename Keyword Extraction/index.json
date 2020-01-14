@@ -1,6 +1,6 @@
 {
-  "title": "Keyword Extraction",
-  "description": "rt",
+  "title": "关键词提取",
+  "description": "基于TF-IDF/TextRank/LSI/LSA模型的关键词提取",
   "difficulty": "Beginner",
   "time": "60 minutes",
   "details": {
