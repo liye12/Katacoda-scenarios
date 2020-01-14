@@ -9,6 +9,7 @@
 ## 导入库
 
 ```
+# -*- coding: utf-8 -*-
 import math
 import jieba
 import jieba.posseg as psg

@@ -15,3 +15,6 @@
 
 https://github.com/liye12/Katacoda-scenarios.git/trunk/stopword/stopword.txt
 `svn export https://github.com/liye12/Katacoda-scenarios.git/trunk/stopword/stopword.txt`{{execute}}
+
+下载语料库
+`svn export https://github.com/liye12/Katacoda-scenarios.git/trunk/corpus/corpus.txt`{{execute}}
