@@ -16,3 +16,8 @@
 ```
 svn export https://github.com/liye12/Katacoda-scenarios.git/trunk/sentiment_analysis/training.txt
 ```{{execute}}
+
+安装nltk的punkt
+`python3`{{execute}}
+`import nltk`{{execute}}
+`nltk.download('punkt')`{{execute}}

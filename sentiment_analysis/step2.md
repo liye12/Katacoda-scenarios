@@ -31,7 +31,7 @@ import numpy as np
 maxlen = 0
 word_freqs = collections.Counter()
 num_recs = 0
-with open('./training.txt','r+') as f:
+with open('./training.txt','r+',encoding='gbk') as f:
     for line in f:
         label, sentence = line.strip().split("\t")
         words = nltk.word_tokenize(sentence.lower())
@@ -65,7 +65,7 @@ index2word = {v:k for k, v in word2index.items()}
 X = np.empty(num_recs,dtype=list)
 y = np.zeros(num_recs)
 i=0
-with open('./training.txt','r+') as f:
+with open('./training.txt','r+',encoding='gbk') as f:
     for line in f:
         label, sentence = line.strip().split("\t")
         words = nltk.word_tokenize(sentence.lower())
