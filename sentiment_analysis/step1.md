@@ -6,8 +6,12 @@
 `pip3 install nltk`{{execute}}
 `pip3 install sklearn`{{execute}}
 
-## 下载训练集
+安装SVN 用于从github下载文件
+
+`sudo apt install subversion`{{execute}}
+
+下载训练集
 
 ```
-
+https://github.com/liye12/Katacoda-scenarios.git/trunk/sentiment_analysis/training.txt
 ```{{execute}}
