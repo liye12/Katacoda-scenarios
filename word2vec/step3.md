@@ -4,7 +4,7 @@ if __name__ == '__main__':
 
     # step 1 读取停用词，构建停用词set集合
     stop_words = []
-    with open('stop_words.txt', encoding='utf-8') as f:  # 读取stop_words.txt，每行为一个词
+    with open('stopword.txt', encoding='utf-8') as f:  # 读取stop_words.txt，每行为一个词
         line = f.readline()  # 按行读取
         while line:
             stop_words.append(line[:-1])  # 去除每行后面的换行符并添加到stop_words中
@@ -16,7 +16,7 @@ if __name__ == '__main__':
     all_word_list = []  # 用于记录所有的词，即词典
     sentence_list = []  # 用于记录所有样本的样本list,如：[["今天","天气","不错"],["我","是","谁"],...,["","",""]]
     line_sum = 1
-    with open('斗破苍穹.txt', encoding='gbk') as f:
+    with open('corpus.txt', encoding='utf-8') as f:
         line = f.readline()  # 按行读取
         while line:  # 判断有没有读取到文件末尾，没有就执行循环语句
             print("正在处理第", line_sum, "行")
@@ -63,7 +63,7 @@ if __name__ == '__main__':
     w2v.load_model('model')  # 加载模型，得到保存的模型参数
 
     # 测试
-    test_word = ["天地", "级别"]
+    test_word = ["出口", "贸易"]
     test_id = [word_list.index(x) for x in test_word]  # 测试单词在词典word_list中的索引，即为单词id
     test_words, near_words, sim_mean, sim_var = w2v.cal_similarity(test_id)  # 计算相似度
     print(test_words, near_words, sim_mean, sim_var)
