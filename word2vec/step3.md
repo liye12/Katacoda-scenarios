@@ -63,7 +63,7 @@ if __name__ == '__main__':
     w2v.load_model('model')  # 加载模型，得到保存的模型参数
 
     # 测试
-    test_word = ["出口", "贸易"]
+    test_word = ["广东省", "珠三角"]
     test_id = [word_list.index(x) for x in test_word]  # 测试单词在词典word_list中的索引，即为单词id
     test_words, near_words, sim_mean, sim_var = w2v.cal_similarity(test_id)  # 计算相似度
     print(test_words, near_words, sim_mean, sim_var)
