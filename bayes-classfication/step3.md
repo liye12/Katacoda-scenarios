@@ -1,6 +1,6 @@
 ## 打开vim
 
-`vim generate_attires`{{execute}}
+`vim generate_attires.py`{{execute}}
 
 ## 进入编辑模式
 
@@ -49,7 +49,9 @@ def gen_attrs():
 ```
 #!/usr/bin/env python
 # encoding: utf-8
-
+import os
+import sys
+sys.path.append('./')
 import operator
 import bayes_classfier
 import generate_attires

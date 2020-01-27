@@ -1,6 +1,6 @@
 ## 打开vim
 
-`vim bayes_classfier`{{execute}}
+`vim bayes_classfier.py`{{execute}}
 
 ## 进入编辑模式
 
