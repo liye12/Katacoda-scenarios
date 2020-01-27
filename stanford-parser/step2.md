@@ -1,6 +1,6 @@
 ## 打开vim
 
-`vim Date_Identify`{{execute}}
+`vim pcfg`{{execute}}
 
 ## 进入编辑模式
 
@@ -45,6 +45,6 @@ parser=stanford.StanfordParser(path_to_jar=parser_path,path_to_models_jar=model_
 sentence=parser.raw_parse(seg_str)
 for line in sentence:
     print(line)
-    line.draw()
+
 
 ```{{execute}}
