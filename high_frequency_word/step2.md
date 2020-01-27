@@ -66,11 +66,11 @@ def main():
     import random
     import jieba
     
-    files=glob.glob('./news/11.txt')
+    files=glob.glob('./data/news/C000013/*.txt')
     corpus=[get_content(x) for x in files]
     
     sample_inx=random.randint(0,len(corpus))
-    split_words=[x for x in jieba.cut(corpus[sample_inx]) if x not in stop_words('./stop_words.utf8.txt')]
+    split_words=[x for x in jieba.cut(corpus[sample_inx]) if x not in stop_words('./stop_words.utf8')]
     print('样本之一：'+corpus[sample_inx])
     print('样本分词效果：'+'/'.join(split_words))
     print('样本TopK（10）词：'+str(get_TF(split_words)))
