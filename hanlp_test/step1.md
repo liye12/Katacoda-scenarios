@@ -98,14 +98,14 @@ recognizer(["President", "Obama", "is", "speaking", "at", "the", "White", "House
 [('Obama', 'PER', 1, 2), ('White House', 'LOC', 6, 8)]
 中文命名实体识别是字符级模型，所以不要忘了用 `list`将字符串转换为字符列表。至于输出，格式为 `(entity, type, begin, end)`。
 
-```python
->>> recognizer = hanlp.load(hanlp.pretrained.ner.MSRA_NER_BERT_BASE_ZH)
->>> recognizer([list('上海华安工业（集团）公司董事长谭旭光和秘书张晚霞来到美国纽约现代艺术博物馆参观。'),
+```
+recognizer = hanlp.load(hanlp.pretrained.ner.MSRA_NER_BERT_BASE_ZH)
+recognizer([list('上海华安工业（集团）公司董事长谭旭光和秘书张晚霞来到美国纽约现代艺术博物馆参观。'),
                 list('萨哈夫说，伊拉克将同联合国销毁伊拉克大规模杀伤性武器特别委员会继续保持合作。')])
+```{{execute}}
+
 [[('上海华安工业（集团）公司', 'NT', 0, 12), ('谭旭光', 'NR', 15, 18), ('张晚霞', 'NR', 21, 24), ('美国', 'NS', 26, 28), ('纽约现代艺术博物馆', 'NS', 28, 37)], 
  [('萨哈夫', 'NR', 0, 3), ('伊拉克', 'NS', 5, 8), ('联合国销毁伊拉克大规模杀伤性武器特别委员会', 'NT', 10, 31)]]
-```
-
 这里的 `MSRA_NER_BERT_BASE_ZH` 是基于 BERT[^bert]的最准确的模型，你可以浏览该模型的评测指标：
 
 ```bash
@@ -122,9 +122,11 @@ accuracy:  99.37%; precision:  94.79%; recall:  95.65%; FB1:  95.22
 
 句法分析是NLP的核心任务，在许多硬派的学者和面试官看来，不懂句法分析的人称不上NLP研究者或工程师。然而通过HanLP，只需两行代码即可完成句法分析。
 
-```python
->>> syntactic_parser = hanlp.load(hanlp.pretrained.dep.PTB_BIAFFINE_DEP_EN)
->>> print(syntactic_parser([('Is', 'VBZ'), ('this', 'DT'), ('the', 'DT'), ('future', 'NN'), ('of', 'IN'), ('chamber', 'NN'), ('music', 'NN'), ('?', '.')]))
+```
+syntactic_parser = hanlp.load(hanlp.pretrained.dep.PTB_BIAFFINE_DEP_EN)
+print(syntactic_parser([('Is', 'VBZ'), ('this', 'DT'), ('the', 'DT'), ('future', 'NN'), ('of', 'IN'), ('chamber', 'NN'), ('music', 'NN'), ('?', '.')]))
+```{{execute}}
+
 1	Is	_	VBZ	_	_	4	cop	_	_
 2	this	_	DT	_	_	4	nsubj	_	_
 3	the	_	DT	_	_	4	det	_	_
@@ -133,28 +135,29 @@ accuracy:  99.37%; precision:  94.79%; recall:  95.65%; FB1:  95.22
 6	chamber	_	NN	_	_	7	nn	_	_
 7	music	_	NN	_	_	5	pobj	_	_
 8	?	_	.	_	_	4	punct	_	_
-```
 
 句法分析器的输入是单词列表及词性列表，输出是 CoNLL-X 格式[^conllx]的句法树，用户可通过 `CoNLLSentence` 类来操作句法树。一个中文例子:
 
-```python
->>> syntactic_parser = hanlp.load(hanlp.pretrained.dep.CTB7_BIAFFINE_DEP_ZH)
->>> print(syntactic_parser([('蜡烛', 'NN'), ('两', 'CD'), ('头', 'NN'), ('烧', 'VV')]))
+```
+syntactic_parser = hanlp.load(hanlp.pretrained.dep.CTB7_BIAFFINE_DEP_ZH)
+print(syntactic_parser([('蜡烛', 'NN'), ('两', 'CD'), ('头', 'NN'), ('烧', 'VV')]))
+```{{execute}}
+
 1	蜡烛	_	NN	_	_	4	nsubj	_	_
 2	两	_	CD	_	_	3	nummod	_	_
 3	头	_	NN	_	_	4	dep	_	_
 4	烧	_	VV	_	_	0	root	_	_
-```
-
 关于句法标签，请参考[《自然语言处理入门》](http://nlp.hankcs.com/book.php)第11章，或等待正式文档。
 
 ### 语义依存分析
 
 语义分析结果为一个有向无环图，称为语义依存图（Semantic Dependency Graph）。图中的节点为单词，边为语义依存弧，边上的标签为语义关系。
 
-```python
->>> semantic_parser = hanlp.load(hanlp.pretrained.sdp.SEMEVAL15_PAS_BIAFFINE_EN)
->>> print(semantic_parser([('Is', 'VBZ'), ('this', 'DT'), ('the', 'DT'), ('future', 'NN'), ('of', 'IN'), ('chamber', 'NN'), ('music', 'NN'), ('?', '.')]))
+```
+semantic_parser = hanlp.load(hanlp.pretrained.sdp.SEMEVAL15_PAS_BIAFFINE_EN)
+print(semantic_parser([('Is', 'VBZ'), ('this', 'DT'), ('the', 'DT'), ('future', 'NN'), ('of', 'IN'), ('chamber', 'NN'), ('music', 'NN'), ('?', '.')]))
+```{{execute}}
+
 1	Is	_	VBZ	_	_	0	ROOT	_	_
 2	this	_	DT	_	_	1	verb_ARG1	_	_
 3	the	_	DT	_	_	0	ROOT	_	_
@@ -166,46 +169,46 @@ accuracy:  99.37%; precision:  94.79%; recall:  95.65%; FB1:  95.22
 7	music	_	NN	_	_	5	prep_ARG2	_	_
 7	music	_	NN	_	_	6	noun_ARG1	_	_
 8	?	_	.	_	_	0	ROOT	_	_
-```
-
 HanLP实现了最先进的biaffine[^biaffine] 模型，支持任意语种的语义依存分析：
 
-```python
->>> semantic_parser = hanlp.load(SEMEVAL16_NEWS_BIAFFINE_ZH)
->>> print(semantic_parser([('蜡烛', 'NN'), ('两', 'CD'), ('头', 'NN'), ('烧', 'VV')]))
+```
+semantic_parser = hanlp.load(SEMEVAL16_NEWS_BIAFFINE_ZH)
+print(semantic_parser([('蜡烛', 'NN'), ('两', 'CD'), ('头', 'NN'), ('烧', 'VV')]))
+```{{execute}}
+
 1	蜡烛	_	NN	_	_	3	Poss	_	_
 1	蜡烛	_	NN	_	_	4	Pat	_	_
 2	两	_	CD	_	_	3	Quan	_	_
 3	头	_	NN	_	_	4	Loc	_	_
 4	烧	_	VV	_	_	0	Root	_	_
-```
-
 输出依然是 `CoNLLSentence` 格式，只不过这次是一个图，图中任意节点可以有零个或任意多个中心词，比如 `蜡烛` 有两个中心词 (ID 3 和 4)。语义依存关系可参考《[中文语义依存分析语料库](https://www.hankcs.com/nlp/sdp-corpus.html)》，或等待正式文档。
 
 ### 流水线
 
 既然句法和语义分析依赖于词性标注，而词性标注又依赖于分词。如果有一种类似于计算图的机制自动将这些模块串联起来就好了。HanLP设计的流水线可以灵活地将多个组件（统计模型或规则系统）组装起来：
 
-```python
+```
 pipeline = hanlp.pipeline() \
     .append(hanlp.utils.rules.split_sentence, output_key='sentences') \
     .append(tokenizer, output_key='tokens') \
     .append(tagger, output_key='part_of_speech_tags') \
     .append(syntactic_parser, input_key=('tokens', 'part_of_speech_tags'), output_key='syntactic_dependencies') \
     .append(semantic_parser, input_key=('tokens', 'part_of_speech_tags'), output_key='semantic_dependencies')
-```
+```{{execute}}
 
 注意流水线的第一级管道是一个普通的Python函数 `split_sentence`，用来将文本拆分为句子。而`input_key`和`output_key`指定了这些管道的连接方式，你可以将这条流水线打印出来观察它的结构：
 
-```python
->>> pipeline
-[None->LambdaComponent->sentences, sentences->NgramConvTokenizer->tokens, tokens->RNNPartOfSpeechTagger->part_of_speech_tags, ('tokens', 'part_of_speech_tags')->BiaffineDependencyParser->syntactic_dependencies, ('tokens', 'part_of_speech_tags')->BiaffineSemanticDependencyParser->semantic_dependencies]
 ```
+pipeline
+[None->LambdaComponent->sentences, sentences->NgramConvTokenizer->tokens, tokens->RNNPartOfSpeechTagger->part_of_speech_tags, ('tokens', 'part_of_speech_tags')->BiaffineDependencyParser->syntactic_dependencies, ('tokens', 'part_of_speech_tags')->BiaffineSemanticDependencyParser->semantic_dependencies]
+```{{execute}}
 
 这次，就像你在日常工作中最常见的场景一样，我们一次性输入一整篇文章 `text`：
 
-```python
->>> print(pipeline(text))
+```
+print(pipeline(text))
+```{{execute}}
+
 {
   "sentences": [
     "Jobs and Wozniak co-founded Apple in 1976 to sell Wozniak's Apple I personal computer.",
@@ -228,8 +231,6 @@ pipeline = hanlp.pipeline() \
     [[[0], ["ROOT"]], [[0], ["ROOT"]], [[1, 2, 4], ["adj_ARG1", "det_ARG1", "verb_ARG1"]], [[1, 10], ["adj_ARG1", "adj_ARG1"]], [[6], ["coord_ARG1"]], [[4], ["verb_ARG2"]], [[6], ["coord_ARG2"]], [[0], ["ROOT"]], [[8], ["det_ARG1"]], [[9], ["noun_ARG1"]], [[0], ["ROOT"]], [[0], ["ROOT"]], [[0], ["ROOT"]], [[11, 12, 13], ["prep_ARG2", "det_ARG1", "noun_ARG1"]], [[0], ["ROOT"]]]
   ]
 }
-```
-
 中文处理和英文一模一样，事实上，HanLP2.0认为所有人类语言都是统一的符号系统：
 
 ```python
