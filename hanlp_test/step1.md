@@ -6,9 +6,9 @@
 
  ## 安装
 
-```bash
-pip install hanlp
 ```
+pip3 install hanlp
+```{{execute}}
 
 要求Python 3.6以上，支持Windows，可以在CPU上运行，推荐GPU/TPU。
 
@@ -18,41 +18,40 @@ pip install hanlp
 
 作为终端用户，第一步需要从磁盘或网络加载预训练模型。比如，此处用两行代码加载一个名为 `PKU_NAME_MERGED_SIX_MONTHS_CONVSEG` 的分词模型。
 
-```python
->>> import hanlp
->>> tokenizer = hanlp.load('PKU_NAME_MERGED_SIX_MONTHS_CONVSEG')
 ```
+import hanlp
+tokenizer = hanlp.load('PKU_NAME_MERGED_SIX_MONTHS_CONVSEG')
+```{{execute}}
 
 HanLP 会自动将 `PKU_NAME_MERGED_SIX_MONTHS_CONVSEG` 解析为一个URL，然后自动下载并解压。由于巨大的用户量，万一下载失败请重试或参考提示手动下载。 
 
 一旦模型下载完毕，即可将`tokenizer`当成一个函数调用：
 
-```python
->>> tokenizer('商品和服务')
-['商品', '和', '服务']
 ```
-
+tokenizer('商品和服务')
+```{{execute}}
+['商品', '和', '服务']
 如果你要处理英文，一个基于规则的普通函数应该足够了。
 
-```python
->>> tokenizer = hanlp.utils.rules.tokenize_english
->>> tokenizer("Don't go gentle into that good night.")
-['Do', "n't", 'go', 'gentle', 'into', 'that', 'good', 'night', '.']
 ```
+tokenizer = hanlp.utils.rules.tokenize_english
+tokenizer("Don't go gentle into that good night.")
+```{{execute}}
+['Do', "n't", 'go', 'gentle', 'into', 'that', 'good', 'night', '.']
 
 #### 并行
 
 好消息，你可以运行得更快。在深度学习的时代，批处理通常带来`batch_size`的加速比。你可以并行切分多个句子，代价是消耗更多GPU显存。
 
-```python
->>> tokenizer(['萨哈夫说，伊拉克将同联合国销毁伊拉克大规模杀伤性武器特别委员会继续保持合作。',
+```
+tokenizer(['萨哈夫说，伊拉克将同联合国销毁伊拉克大规模杀伤性武器特别委员会继续保持合作。',
                '上海华安工业（集团）公司董事长谭旭光和秘书张晚霞来到美国纽约现代艺术博物馆参观。',
                'HanLP支援臺灣正體、香港繁體，具有新詞辨識能力的中文斷詞系統'])
+```{{execute}}
 [['萨哈夫', '说', '，', '伊拉克', '将', '同', '联合国', '销毁', '伊拉克', '大', '规模', '杀伤性', '武器', '特别', '委员会', '继续', '保持', '合作', '。'], 
  ['上海', '华安', '工业', '（', '集团', '）', '公司', '董事长', '谭旭光', '和', '秘书', '张晚霞', '来到', '美国', '纽约', '现代', '艺术', '博物馆', '参观', '。'], 
  ['HanLP', '支援', '臺灣', '正體', '、', '香港', '繁體', '，', '具有', '新詞', '辨識', '能力', '的', '中文', '斷詞', '系統']]
-```
-
+ 
 就是如此简单，你现在已经能够将HanLP提供的最新的深度学习模型应用到你的研究和工作中了。下面是一些小技巧：
 
 - 打印 `hanlp.pretrained.ALL` 来列出HanLP中的所有预训练模型。比如，`CTB6_CONVSEG`是在CTB6上训练的分词模型。
@@ -61,43 +60,42 @@ HanLP 会自动将 `PKU_NAME_MERGED_SIX_MONTHS_CONVSEG` 解析为一个URL，然
 
 - 使用 `hanlp.pretrained.*` 来分门别类地浏览预训练模型，你还可以通过变量来加载模型。
 
-  ```python
-  >>> hanlp.pretrained.cws.PKU_NAME_MERGED_SIX_MONTHS_CONVSEG
-  'https://file.hankcs.com/hanlp/cws/pku98_6m_conv_ngram_20200110_134736.zip'
   ```
+hanlp.pretrained.cws.PKU_NAME_MERGED_SIX_MONTHS_CONVSEG
+  'https://file.hankcs.com/hanlp/cws/pku98_6m_conv_ngram_20200110_134736.zip'
+  ```{{execute}}
 
 ### 词性标注
 
 词性标注器的输入是单词，输出是每个单词的词性标签。
 
-```python
->>> tagger = hanlp.load(hanlp.pretrained.pos.PTB_POS_RNN_FASTTEXT_EN)
->>> tagger([['I', 'banked', '2', 'dollars', 'in', 'a', 'bank', '.'],
+```
+tagger = hanlp.load(hanlp.pretrained.pos.PTB_POS_RNN_FASTTEXT_EN)
+tagger([['I', 'banked', '2', 'dollars', 'in', 'a', 'bank', '.'],
             ['Is', 'this', 'the', 'future', 'of', 'chamber', 'music', '?']])
+```{{execute}}
 [['PRP', 'VBD', 'CD', 'NNS', 'IN', 'DT', 'NN', '.'], 
  ['VBZ', 'DT', 'DT', 'NN', 'IN', 'NN', 'NN', '.']]
-```
-
 词性标注同样支持多语种，取决于你加载的是哪个模型（注意变量名后面的`ZH`）。
 
-```python
->>> tagger = hanlp.load(hanlp.pretrained.pos.CTB5_POS_RNN_FASTTEXT_ZH)
->>> tagger(['我', '的', '希望', '是', '希望', '和平'])
-['PN', 'DEG', 'NN', 'VC', 'VV', 'NN']
 ```
+tagger = hanlp.load(hanlp.pretrained.pos.CTB5_POS_RNN_FASTTEXT_ZH)
+tagger(['我', '的', '希望', '是', '希望', '和平'])
+```{{execute}}
 
+['PN', 'DEG', 'NN', 'VC', 'VV', 'NN']
 注意到句子中两个 `希望`的词性各不相同，第一个是名词而第二个是动词。关于词性标签，请参考[《自然语言处理入门》](http://nlp.hankcs.com/book.php)第七章，或等待正式文档。这个标注器使用了fasttext[^fasttext] 作为嵌入层，所以免疫于OOV。
 
 ### 命名实体识别
 
 命名实体识别模块的输入是单词列表，输出是命名实体的边界和类别。
 
-```python
->>> recognizer = hanlp.load(hanlp.pretrained.ner.CONLL03_NER_BERT_BASE_UNCASED_EN)
->>> recognizer(["President", "Obama", "is", "speaking", "at", "the", "White", "House"])
-[('Obama', 'PER', 1, 2), ('White House', 'LOC', 6, 8)]
 ```
+recognizer = hanlp.load(hanlp.pretrained.ner.CONLL03_NER_BERT_BASE_UNCASED_EN)
+recognizer(["President", "Obama", "is", "speaking", "at", "the", "White", "House"])
+```{{execute}}
 
+[('Obama', 'PER', 1, 2), ('White House', 'LOC', 6, 8)]
 中文命名实体识别是字符级模型，所以不要忘了用 `list`将字符串转换为字符列表。至于输出，格式为 `(entity, type, begin, end)`。
 
 ```python
