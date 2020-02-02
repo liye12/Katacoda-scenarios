@@ -13,7 +13,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-datasets = {'banala': {'long': 400, 'not_long': 100, 'sweet': 350, 'not_sweet': 150, 'yellow': 450, 'not_yellow': 50},
+datasets = {'banana': {'long': 400, 'not_long': 100, 'sweet': 350, 'not_sweet': 150, 'yellow': 450, 'not_yellow': 50},
             'orange': {'long': 0, 'not_long': 300, 'sweet': 150, 'not_sweet': 150, 'yellow': 300, 'not_yellow': 0},
             'other_fruit': {'long': 100, 'not_long': 100, 'sweet': 150, 'not_sweet': 50, 'yellow': 50,
                             'not_yellow': 150}
@@ -22,7 +22,7 @@ datasets = {'banala': {'long': 400, 'not_long': 100, 'sweet': 350, 'not_sweet': 
 
 def count_total(data):
     '''计算各种水果的总数
-    return {‘banala’:500 ...}'''
+    return {‘banana’:500 ...}'''
     count = {}
     total = 0
     for fruit in data:
@@ -37,7 +37,7 @@ def count_total(data):
 
 def cal_base_rates(data):
     '''计算各种水果的先验概率
-    return {‘banala’:0.5 ...}'''
+    return {‘banana’:0.5 ...}'''
     categories, total = count_total(data)
     cal_base_rates = {}
     for label in categories:
@@ -52,7 +52,7 @@ def cal_base_rates(data):
 
 def likelihold_prob(data):
     '''计算各个特征值在已知水果下的概率（likelihood probabilities）
-    {'banala':{'long':0.8}...}'''
+    {'banana':{'long':0.8}...}'''
     count, _ = count_total(data)
     likelihold = {}
     for fruit in data:
@@ -73,7 +73,7 @@ def evidence_prob(data):
     '''计算特征的概率对分类结果的影响
     return {'long':50%...}'''
     # 水果的所有特征
-    attrs = list(data['banala'].keys())
+    attrs = list(data['banana'].keys())
     count, total = count_total(data)
     evidence_prob = {}
 
@@ -124,6 +124,6 @@ class navie_bayes_classifier:
 
 
 ## 保存分类器
-## 点击ESC 推出vim编辑模型
-保存并推出vim,输入以下命令 
-:wq
+## 点击ESC 退出vim编辑模型
+保存并退出vim,输入以下命令 
+`:wq`{{execute}}

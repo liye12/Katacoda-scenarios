@@ -6,7 +6,7 @@
 
 `i`{{execute}}
 
-## 读取数据
+## 数据读取模块，在主函数中调用，数据路径为'./data/news/C000013/*.txt'
 ```
 def get_content(path):
     with open(path,'r',encoding='gbk',errors='ignore') as f:

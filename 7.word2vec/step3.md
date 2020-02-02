@@ -69,9 +69,9 @@ if __name__ == '__main__':
     print(test_words, near_words, sim_mean, sim_var)
 ```{{execute}}
 
-## 点击ESC 推出vim编辑模型
+## 点击ESC 退出vim编辑模型
 保存并退出vim,输入以下命令 
-:wq
+`:wq`{{execute}}
 
 ## 运行python文件
 
